@@ -1,0 +1,29 @@
+{
+  //basic_settings
+  "coc.preferences.extensionUpdateCheck": "never",
+  "suggest.noselect": true,
+  "codeLens.enable": true,
+
+
+
+  //coc-snippets
+  "snippets.ultisnips.directories": [
+    "UltiSnips",
+  ],
+  "snippets.ultisnips.pythonPrompt": false,
+
+  //coc-explorer
+  "explorer.icon.enableNerdfont": true,
+
+  //language_server
+  "languageserver": {
+     "clangd": {
+     "command": "clangd",
+     "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
+     "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
+     }
+  }
+
+}
+
+
