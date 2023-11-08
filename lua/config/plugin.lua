@@ -1,3 +1,4 @@
+--initialize lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -9,26 +10,20 @@ if not vim.loop.fs_stat(lazypath) then
         lazypath,
     })
 end
+
 vim.opt.rtp:prepend(lazypath)
-require("lazy").setup({
-    {
-        "vim-airline/vim-airline"
-    },
-    {
-        'nvimdev/dashboard-nvim',
-        event = 'VimEnter',
-        config = function()
-            require('dashboard').setup(require('db'))
-        end,
-        dependencies = { {'nvim-tree/nvim-web-devicons'}}
-    },
-    {
-        "neoclide/coc.nvim"
-    },
-
+require('lazy').setup({
+    require('plugins.coc'),
+    require('plugins.airline'),
+    require('plugins.dashboard'),
+    require('plugins.visual-multi'),
+    require('plugins.color'),
+    require('plugins.competitest')
 })
---[[
 
+require('my_plugins.compileRun')
+
+--[[
 "vim-plug
 call plug#begin()
 
@@ -38,9 +33,6 @@ Plug 'MunifTanjim/nui.nvim'
 Plug 'mg979/vim-visual-multi'
 Plug 'xeluxee/competitest.nvim'
 Plug 'ryanoasis/vim-devicons'
-Plug 'vim-autoformat/vim-autoformat'
-"Plug 'itchyny/vim-cursorword'
-"Plug 'glepnir/oceanic-material'
 Plug 'morhetz/gruvbox'
 Plug 'nvimdev/dashboard-nvim'
 
