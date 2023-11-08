@@ -15,3 +15,4 @@ source ~/.config/nvim/settings/plugSettings/firstTimeLoading.vim
 source ~/.config/nvim/settings/plugSettings/competiTest.vim
 source ~/.config/nvim/settings/plugSettings/snippets.vim
 source ~/.config/nvim/settings/plugSettings/colors.vim
+:lua require('db')
