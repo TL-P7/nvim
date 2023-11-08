@@ -12,5 +12,6 @@ Plug 'vim-autoformat/vim-autoformat'
 "Plug 'glepnir/oceanic-material'
 Plug 'morhetz/gruvbox'
 Plug 'nvimdev/dashboard-nvim'
+Plug 'nvim-tree/nvim-web-devicons'
 
 call plug#end()
