@@ -33,23 +33,26 @@ vim.o.t_ut = ''
 vim.o.smartindent = true
 vim.o.autoindent = true
 
-local ft = vim.bo.filetype
+vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
+  callback = function ()
+    local ft = vim.bo.filetype
+    if ft == 'c' or ft == 'cpp' then
+      vim.o.cindent = true
+      vim.o.tabstop = 4
+      vim.o.softtabstop = 4
+      vim.o.shiftwidth = 4
+    elseif ft == 'go' or ft == 'py' or ft == 'lua' or ft == 'vim' then
+      vim.o.tabstop = 2
+      vim.o.softtabstop = 2
+      vim.o.shiftwidth = 2
+    else
+      vim.o.tabstop = 4
+      vim.o.softtabstop = 4
+      vim.o.shiftwidth = 4
+    end
+  end
+})
 
-if ft == 'c' or ft == 'cpp' then
-    vim.o.cindent = true
-    vim.o.tabstop = 4
-    vim.o.softtabstop = 4
-    vim.o.shiftwidth = 4
-else if ft == 'go' or ft == 'py' or ft == 'lua' or ft == 'vim' then
-    vim.o.tabstop = 2
-    vim.o.softtabstop = 2
-    vim.o.shiftwidth = 2
-else
-    vim.o.tabstop = 4
-    vim.o.softtabstop = 4
-    vim.o.shiftwidth = 4
-end
-end
 
 vim.o.list = true
 vim.opt.listchars = {tab = '->', trail = '-'}

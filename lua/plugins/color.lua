@@ -1,8 +1,10 @@
 return {
   "folke/tokyonight.nvim",
+  style = 'moon',
+  light_style = 'day',
   lazy = false,
-  opts = { style = 'moon'},
+  priority = 1000,
   config = function ()
-    vim.cmd[[colorscheme tokyonight-moon]]
+      vim.cmd('colorscheme tokyonight-moon')
   end,
 }
