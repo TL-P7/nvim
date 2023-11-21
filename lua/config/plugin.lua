@@ -12,13 +12,15 @@ if not vim.loop.fs_stat(lazypath) then
 end
 
 vim.opt.rtp:prepend(lazypath)
+
 require('lazy').setup({
   require('plugins.lsp'),
   require('plugins.ui'),
   require('plugins.visual-multi'),
   require('plugins.color'),
   require('plugins.competitest'),
-  require('plugins.filebrowser')
+  require('plugins.filebrowser'),
+  require("plugins.editor"),
 })
 
 require('my_plugins.compileRun')

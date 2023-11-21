@@ -36,7 +36,7 @@ vim.o.autoindent = true
 vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
   callback = function ()
     local ft = vim.bo.filetype
-    if ft == 'c' or ft == 'cpp' then
+    if ft == 'c' or ft == 'cpp' or ft == 'h' then
       vim.o.cindent = true
       vim.o.tabstop = 4
       vim.o.softtabstop = 4

@@ -1,4 +1,7 @@
 vim.g.mapleader = ' '
+local M = {
+
+}
 --settings for copy and paste
 vim.keymap.set('n', '<C-e>', '<Esc>ggVG')
 vim.keymap.set('v', '<C-y>', '"+y')
@@ -62,8 +65,6 @@ nnoremap <silent> gy <Plug>(coc-type-definition)
 nnoremap <silent> gi <Plug>(coc-implementation)
 nnoremap <silent> gr <Plug>(coc-references)
 
-nmap \ <Plug>(coc-codeaction-selected)
-
 function! s:cocActionsOpenFromSelected(type) abort
 execute 'CocCommand actions.open ' . a:type
 endfunction
@@ -85,14 +86,14 @@ endfunction
 
 "coc-explorer
 
-nnoremap mt <Cmd>CocCommand explorer --preset simplify --width 30<CR>
+nnoremap <leader>mt <Cmd>CocCommand explorer --preset simplify --width 30<CR>
 
 " Use preset argument to open it
-nnoremap mf <Cmd>CocCommand explorer --preset floating <CR>
-nnoremap mb <Cmd>CocCommand explorer --preset buffer <CR>
+nnoremap <leader>mf <Cmd>CocCommand explorer --preset floating <CR>
+nnoremap <leader>mb <Cmd>CocCommand explorer --preset buffer <CR>
 
 " List all presets
-nmap ml <Cmd>CocList explPresets<CR>
+nmap <leader>ml <Cmd>CocList explPresets<CR>
 
 
 "coc-snippets
@@ -123,7 +124,7 @@ vim.keymap.set('n', '<leader>d', '<Cmd>Dashboard<CR>')
 
 
 --indent
-vim.keymap.set('n', '<C-i>', '=G')
+vim.keymap.set('n', '<C-f>', '=G')
 
 --telescope
 local builtin = require('telescope.builtin')
@@ -131,3 +132,13 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+--disable HJKL
+vim.keymap.set('n', 'H', '<Nop>')
+vim.keymap.set('n', 'J', '<Nop>')
+vim.keymap.set('n', 'K', '<Nop>')
+vim.keymap.set('n', 'L', '<Nop>')
+
+--rereferred Shift+Enter
+vim.keymap.set('n', '<S-CR>', '<CR>')
+
