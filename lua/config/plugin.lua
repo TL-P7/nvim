@@ -24,19 +24,3 @@ require('lazy').setup({
 })
 
 require('my_plugins.compileRun')
-
---[[
-"vim-plug
-call plug#begin()
-
-Plug 'vim-airline/vim-airline'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'MunifTanjim/nui.nvim'
-Plug 'mg979/vim-visual-multi'
-Plug 'xeluxee/competitest.nvim'
-Plug 'ryanoasis/vim-devicons'
-Plug 'morhetz/gruvbox'
-Plug 'nvimdev/dashboard-nvim'
-
-call plug#end()
---]]
