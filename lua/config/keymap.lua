@@ -1,33 +1,40 @@
 vim.g.mapleader = ' '
-local M = {
+local silent= {noremap = true, silent = true}
+local mappings = {
+
+  --settings for copy and paste
+  { mode = 'n',          from = '<C-e>',           to = '<Esc>ggVG'                                                   },
+  { mode = 'v',          from = '<C-y>',           to = '"+y'                                                         },
+  { mode = 'i',          from = '<C-p>',           to = '<Esc>"*pa'                                                   },
+  { mode = 'v',          from = '<C-p>',           to = '<Esc>"*p'                                                    },
+  { mode = 'n',          from = '<C-p>',           to = '"*p'                                                         },
+
+  --nohl
+  { mode = 'n',          from = '<Esc>u',          to = ':nohlsearch<CR>',                     opt = silent           },
+
+  --save file
+  { mode = {'n', 'v'},   from = 's',               to = '<Nop>'                                                       },
+  { mode = 'n',          from = '<C-s>',           to = ':w<CR>',                              opt = silent           },
+
+  --fast source
+  { mode = 'n',          from = 'zc',              to = ':source ~/.config/nvim/init.lua<CR>', opt = silent           },
+  { mode = 'n',          from = 'zz',              to = ':e ~/.config/nvim/init.lua<CR>',                             },
+
+  --settings for buliding new tabes and splits
+  { mode = 'n',          from = '<C-m>',           to = ':tabe<CR>',                                                  },
+  { mode = 'n',          from = "<C-h>",           to = ":BufferLineCyclePrev<CR>",            opt = silent           },
+  { mode = 'n',          from = "<C-l>",           to = ":BufferLineCycleNext<CR>",            opt = silent           },
+  { mode = 'n',          from = "<C-q>",           to = ":Bdelete!<CR>",                       opt = silent           },
+  { mode = 'n',          from = "<leader>q",       to = ":Bdelete!<CR>:q<CR>",                 opt = silent           },
 
 }
---settings for copy and paste
-vim.keymap.set('n', '<C-e>', '<Esc>ggVG')
-vim.keymap.set('v', '<C-y>', '"+y')
-vim.keymap.set('i', '<C-p>', '<Esc>"*pa')
-vim.keymap.set('v', '<C-p>', '<Esc>"*p')
-vim.keymap.set('n', '<C-p>', '"*p')
+
+for _, mapping in ipairs(mappings) do
+  vim.keymap.set(mapping.mode or 'n', mapping.from, mapping.to, mapping.opt or {noremap = true})
+end
 
 
---nohl
-vim.keymap.set('n', '<Esc>u', ':nohlsearch<CR>')
 
---fast source
-vim.cmd([[
-"settings for file&rc operating and selecting
-nmap s <Nop>
-nnoremap <C-s> :w<CR>
-nnoremap zc :source ~/.config/nvim/init.lua<CR>
-nnoremap zz :e ~/.config/nvim/init.lua<CR>
-]])
-
---settings for buliding new tabes and splits
-vim.keymap.set('n', '<C-m>', ':tabe<CR>')
-vim.keymap.set("n", "<C-h>", ":BufferLineCyclePrev<CR>")
-vim.keymap.set("n", "<C-l>", ":BufferLineCycleNext<CR>")
-vim.keymap.set("n", "<C-q>", ":Bdelete<CR>")
-vim.keymap.set("n", "<leader>q", ":Bdelete<CR>:q<CR>")
 --vim.keymap.set('n', '<C-h>', ':-tabnext<CR>')
 --vim.keymap.set('n', '<C-l>', ':+tabnext<CR>')
 vim.keymap.set('n', 'sr', ':set splitright<CR>:vsplit<CR>')
@@ -40,52 +47,10 @@ vim.keymap.set('', '<left>', ':vertical resize -2<CR>')
 vim.keymap.set('', '<right>', ':vertical resize +2<CR>')
 
 
--- coc
+
+
+
 vim.cmd([[
-
-inoremap <silent><expr> <TAB>
-\ coc#pum#visible() ? coc#pum#next(1) :
-\ CheckBackspace() ? "\<Tab>" :
-\ coc#refresh()
-
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-function! CheckBackspace() abort
-let col = col('.') - 1
-return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-inoremap <silent><expr> <c-h> coc#refresh()
-
-nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
-nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
-
-nnoremap <silent> gd <Plug>(coc-definition)
-nnoremap <silent> gy <Plug>(coc-type-definition)
-nnoremap <silent> gi <Plug>(coc-implementation)
-nnoremap <silent> gr <Plug>(coc-references)
-
-function! s:cocActionsOpenFromSelected(type) abort
-execute 'CocCommand actions.open ' . a:type
-endfunction
-
-xmap <leader>s  <Plug>(coc-codeaction-selected)
-nmap <leader>sw  <Plug>(coc-codeaction-selected)w
-
-nnoremap <silent> K :call ShowDocumentation()<CR>
-
-function! ShowDocumentation()
-call CocActionAsync('highlight')
-if (index(['vim','help'], &filetype) >= 0)
-execute 'h '.expand('<cword>')
-else
-call CocAction('doHover')
-endif
-endfunction
-
-
-"coc-explorer
-
 nnoremap <leader>mt <Cmd>CocCommand explorer --preset simplify --width 30<CR>
 
 " Use preset argument to open it
@@ -94,16 +59,6 @@ nnoremap <leader>mb <Cmd>CocCommand explorer --preset buffer <CR>
 
 " List all presets
 nmap <leader>ml <Cmd>CocList explPresets<CR>
-
-
-"coc-snippets
-"Use :CocList snippets to open snippets list used by current buffer.
-"Use :CocCommand snippets.openSnippetFiles to choose and open a snippet file that used by current document.
-"Use :CocCommand snippets.editSnippets to edit user's ultisnips snippets of current document filetype.
-"Use :CocCommand snippets.openOutput to open output channel of snippets.
-
-imap <C-l> <Plug>(coc-snippets-expand)
-vmap <C-j> <Plug>(coc-snippets-select)
 
 ]])
 
@@ -122,7 +77,6 @@ vim.cmd([[
 --Dashboard
 vim.keymap.set('n', '<leader>d', '<Cmd>Dashboard<CR>')
 
-
 --indent
 vim.keymap.set('n', '<C-f>', '=G')
 
@@ -132,13 +86,21 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>fk', builtin.keymaps, {})
 
---disable HJKL
-vim.keymap.set('n', 'H', '<Nop>')
-vim.keymap.set('n', 'J', '<Nop>')
-vim.keymap.set('n', 'K', '<Nop>')
-vim.keymap.set('n', 'L', '<Nop>')
 
 --rereferred Shift+Enter
-vim.keymap.set('n', '<S-CR>', '<CR>')
+vim.keymap.set('i', '<S-CR>', '<CR>')
 
+
+
+--LuaSnip
+vim.keymap.set({"i"}, "<C-l>", function() ls.expand() end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-j>", function() ls.jump( 1) end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-k>", function() ls.jump(-1) end, {silent = true})
+
+vim.keymap.set({"i", "s"}, "<C-E>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
+end, {silent = true})

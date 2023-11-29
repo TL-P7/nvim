@@ -1,8 +1,8 @@
 return {
   {
     --dashboard
-    'nvimdev/dashboard-nvim',
-    event = 'VimEnter',
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
     config = function()
       local logo = [[
        █████╗  ██████╗███╗   ███╗
@@ -12,66 +12,66 @@ return {
       ██║  ██║╚██████╗██║ ╚═╝ ██║
       ╚═╝  ╚═╝ ╚═════╝╚═╝     ╚═╝
       ]]
-      logo = '\n\n' .. logo .. '\n'
-      require('dashboard').setup {
-        theme = 'hyper',
+      logo = "\n\n" .. logo .. "\n"
+      require("dashboard").setup {
+        theme = "hyper",
         config = {
-          header = vim.split(logo, '\n'),
+          header = vim.split(logo, "\n"),
           week_header = {
             enable = false,
           },
           shortcut = {
-            { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
+            { desc = "󰊳 Update", group = "@property", action = "Lazy update", key = "u" },
             {
-              icon = ' ',
-              icon_hl = '@variable',
-              desc = 'Files',
-              group = 'Label',
-              action = 'Telescope find_files',
-              key = 'f',
+              icon = " ",
+              icon_hl = "@variable",
+              desc = "Files",
+              group = "Label",
+              action = "Telescope find_files",
+              key = "f",
             },
             {
-              desc = ' Apps',
-              group = 'DiagnosticHint',
-              action = 'Telescope app',
-              key = 'a',
+              desc = " Apps",
+              group = "DiagnosticHint",
+              action = "Telescope app",
+              key = "a",
             },
             {
-              desc = ' dotfiles',
-              group = 'Number',
-              action = 'Telescope dotfiles',
-              key = 'd',
+              desc = " dotfiles",
+              group = "Number",
+              action = "Telescope dotfiles",
+              key = "d",
             },
           },
-          footer = {'TODO: coc-cofig, autopairs'},
+          footer = { "TODO: coc-config" },
         },
       }
     end,
-    dependencies = { {'nvim-tree/nvim-web-devicons'}}
+    dependencies = { { "nvim-tree/nvim-web-devicons" } }
   },
   --lualine
   {
-    'nvim-lualine/lualine.nvim',
-    dependencies = 'nvim-tree/nvim-web-devicons',
-    config = function ()
-      require('lualine').setup {
+    "nvim-lualine/lualine.nvim",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("lualine").setup {
         options = {
-          theme = 'tokyonight'
+          theme = "tokyonight"
         }
       }
     end
   },
   --bufferline
   {
-    'akinsho/bufferline.nvim',
+    "akinsho/bufferline.nvim",
     version = "*",
-    dependencies = {'nvim-tree/nvim-web-devicons', 'moll/vim-bbye'},
-    config = function ()
-      require('bufferline').setup {
+    dependencies = { "nvim-tree/nvim-web-devicons", "moll/vim-bbye" },
+    config = function()
+      require("bufferline").setup {
         options = {
-          theme = 'tokyonight',
-          --mode = 'tabs',
-          diagnostics = 'coc',
+          theme = "tokyonight",
+          --mode = "tabs",
+          diagnostics = "coc",
           offsets = {
             {
               --TODO
@@ -91,4 +91,36 @@ return {
       }
     end,
   },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    config = {
+      lsp = {
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+      },
+      presets = {
+        bottom_search = true,
+        long_message_to_split = true,
+        inc_rename = false,
+        lsp_doc_border = false,
+      },
+    },
+    opts = {
+      cmdline = {
+      }
+      -- add any options here
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    }
+  }
 }
