@@ -15,6 +15,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   require("plugins.lsp"),
+  require("plugins.autocomplete"),
+  require("plugins.copilot"),
   require("plugins.ui"),
   require("plugins.visual-multi"),
   require("plugins.color"),

@@ -1,18 +1,10 @@
 {
     //basic_settings
     "coc.preferences.extensionUpdateCheck": "never",
-    "suggest.noselect": true,
-    "codeLens.enable": true,
-
-
-    //coc-snippets
-    "snippets.ultisnips.directories": [
-        "UltiSnips"
-    ],
-    "snippets.ultisnips.pythonPrompt": false,
 
     //coc-explorer
     "explorer.icon.enableNerdfont": true,
+
 
     // coc-explorer
         "explorer.keyMappings.global": {

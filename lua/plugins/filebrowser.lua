@@ -1,8 +1,9 @@
 return {
   {
-    "nvim-telescope/telescope.nvim", tag = "0.1.4",
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.4",
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = function ()
+    config = function()
       require("telescope").setup({
         defaults = {
           -- Default configuration for telescope goes here:
@@ -42,7 +43,7 @@ return {
   {
     --coc-explorer
     'neoclide/coc.nvim',
-    config = function ()
+    config = function()
       vim.cmd([[
       let g:coc_explorer_global_presets = {
       \'nvim': {
@@ -101,7 +102,7 @@ return {
     "nvim-tree/nvim-tree.lua",
     enabled = false,
     dependencies = "nvim-tree/nvim-web-devicons",
-    config = function ()
+    config = function()
       require("nvim-tree").setup({
 
       })
