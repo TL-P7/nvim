@@ -83,23 +83,23 @@ local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
 vim.keymap.set('n', '<leader>fc', builtin.current_buffer_fuzzy_find, {})
 --vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fg', builtin.git_status, {})
+vim.keymap.set('n', '<leader>gs', builtin.git_status, {})
 vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 vim.keymap.set("n", "<leader>fk", builtin.keymaps, {})
- vim.keymap.set('n', '<leader>fs', builtin.spell_suggest, {})
+ vim.keymap.set('n', '<leader>ss', builtin.spell_suggest, {})
 
 --rereferred Shift+Enter
 vim.keymap.set("i", "<S-CR>", "<CR>")
 
 
 --LuaSnip
-vim.keymap.set({ "i" }, "<C-l>", function() ls.expand() end, { silent = true })
-vim.keymap.set({ "i", "s" }, "<C-j>", function() ls.jump(1) end, { silent = true })
-vim.keymap.set({ "i", "s" }, "<C-k>", function() ls.jump(-1) end, { silent = true })
-
-vim.keymap.set({ "i", "s" }, "<C-E>", function()
-  if ls.choice_active() then
-    ls.change_choice(1)
-  end
-end, { silent = true })
+--vim.keymap.set({ "i" }, "<C-l>", function() ls.expand() end, { silent = true })
+--vim.keymap.set({ "i", "s" }, "<C-j>", function() ls.jump(1) end, { silent = true })
+--vim.keymap.set({ "i", "s" }, "<C-k>", function() ls.jump(-1) end, { silent = true })
+--
+--vim.keymap.set({ "i", "s" }, "<C-E>", function()
+  --if ls.choice_active() then
+    --ls.change_choice(1)
+  --end
+--end, { silent = true })

@@ -7,7 +7,7 @@ func! CompileRunGcc()
         set splitbelow
         :sp
         :res -5
-        term gcc % -o %< && time ./%<
+        term gcc -std=c2x % -o %< && time ./%<
     elseif &filetype == 'cpp'
         set splitbelow
         exec "!g++ -std=c++20 % -Wall -o %<"

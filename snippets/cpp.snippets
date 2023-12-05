@@ -1,0 +1,109 @@
+snippet tem
+	#include <bits/stdc++.h>
+	
+	using namespace std;
+	
+	typedef long long ll;
+	typedef pair<int, int> PII;
+	typedef long double ld;
+	
+	#define rep_type int
+	#define rep(i, a, b) for(rep_type i = (a); i < (b); i++)
+	#define per(i, a, b) for(rep_type i = (a); i >= (b); i--)
+	#define _rep(i, a, b) for(rep_type i = (a), __ = (b); i<= __; i++)
+	
+	int main() {
+	    ${0}
+	    return 0;
+	}
+
+snippet cf cf template
+    #include <bits/stdc++.h>
+
+    using namespace std;
+
+    typedef long long ll;
+    typedef pair<int, int> PII;
+    typedef long double ld;
+
+    #define rep_type int
+    #define rep(i, a, b) for(rep_type i = (a); i < (b); i++)
+    #define per(i, a, b) for(rep_type i = (a); i >= (b); i--)
+    #define _rep(i, a, b) for(rep_type i = (a), __ = (b); i<= __; i++)
+
+    void solve() {
+        ${0}
+    }
+
+    int main() {
+        int t;
+        cin >> t;
+        while (t--) {
+            solve();
+        }
+        return 0;
+    }
+
+snippet qmi quick pow
+    ll qmi(ll a, ll b) {
+        ll res = 1;
+        while (b) {
+            if (b & 1) {
+                res = res * a;
+            }
+            a = a * a;
+            b >>= 1;
+        }
+        return res;
+    }
+
+
+snippet qmip quick pow with p
+    ll qmi(ll a, ll b, ll p) {
+        ll res = 1;
+        while (b) {
+            if (b & 1) {
+                res = res * a % p;
+            }
+            a = a * a % p;
+            b >>= 1;
+        }
+        return res;
+    }
+
+snippet qminop quick pow without p
+    ll qmi(ll a, ll b) {
+        ll res = 1;
+        while (b) {
+            if (b & 1) {
+                res = res * a;
+            }
+            a = a * a;
+            b >>= 1;
+        }
+        return res;
+    }
+
+snippet exgcd extended gcd
+    ll exgcd(ll a, ll b, ll &x, ll &y) {
+        if (!b) {
+            x = 1;
+            y = 0;
+            return a;
+        }
+        ll d = exgcd(b, a % b, y, x);
+        y -= a / b * x;
+        return d;
+    }
+
+snippet exgcdp extended gcd with p
+    ll exgcd (ll a, ll b, ll &x, ll &y, ll p) {
+        if (!b) {
+            x = 1;
+            y = 0;
+            return a;
+        }
+        ll d = exgcd(b, a % b, y, x, p);
+        y -= a / b * x;
+        return d;
+    }
