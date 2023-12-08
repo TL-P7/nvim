@@ -23,6 +23,7 @@ require("lazy").setup({
   require("plugins.competitest"),
   require("plugins.filebrowser"),
   require("plugins.editor"),
+  require("plugins.markdown")
 })
 
 require("my_plugins.compileRun")

@@ -7,7 +7,7 @@ func! CompileRunGcc()
         set splitbelow
         :sp
         :res -5
-        term gcc -std=c2x % -o %< && time ./%<
+        term gcc -std=c99 % -o %< && time ./%<
     elseif &filetype == 'cpp'
         set splitbelow
         exec "!g++ -std=c++20 % -Wall -o %<"
@@ -34,7 +34,7 @@ func! CompileRunGcc()
     elseif &filetype == 'html'
         silent! exec "!".g:mkdp_browser." % &"
     elseif &filetype == 'markdown'
-        exec "InstantMarkdownPreview"
+        exec "MarkdownPreview"
     elseif &filetype == 'tex'
         silent! exec "VimtexStop"
         silent! exec "VimtexCompile"

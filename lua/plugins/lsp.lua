@@ -82,8 +82,7 @@ return {
               --vim.keymap.set('i', '<c-f>', vim.lsp.buf.signature_help, opts)
               vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
               vim.keymap.set({ 'n', 'x' }, '<C-f>', function() vim.lsp.buf.format({ async = true }) end, opts)
-              vim.keymap.set({ 'n', 'v' }, '<leader>sw', vim.lsp.buf.code_action, opts)
-              vim.keymap.set({ 'n', 'v' }, "<leader>s", vim.lsp.buf.code_action, opts)
+              vim.keymap.set({ 'n', 'v' }, "<leader>fa", vim.lsp.buf.code_action, opts)
               vim.keymap.set('n', '[g', vim.diagnostic.goto_prev, opts)
               vim.keymap.set('n', ']g', vim.diagnostic.goto_next, opts)
             end

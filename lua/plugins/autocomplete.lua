@@ -106,15 +106,16 @@ return {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "nvim_lua" },
-          { name = "buffer" },
-        }, {
-          { name = "path" },
-          { name = "luasnip" },
-          { name = "copilot" }
-        }),
+        sources = cmp.config.sources(
+          {
+            { name = "nvim_lsp" },
+            { name = "nvim_lua" },
+            { name = "luasnip" },
+            { name = "copilot" },
+            { name = "buffer" },
+            { name = "path" },
+          }
+        ),
 
         formatting = {
           format = lspkind.cmp_format({
