@@ -43,7 +43,7 @@ return {
               key = "d",
             },
           },
-          footer = { "TODO: coc-config" },
+          footer = { "TODO: nvim-dap" },
         },
       }
     end,
@@ -52,18 +52,20 @@ return {
   --lualine
   {
     "nvim-lualine/lualine.nvim",
+    event = "BufEnter",
     dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
       require("lualine").setup {
         options = {
           theme = "tokyonight"
-        }
+        },
       }
     end
   },
   --bufferline
   {
     "akinsho/bufferline.nvim",
+    event = "BufEnter",
     version = "*",
     dependencies = { "nvim-tree/nvim-web-devicons", "moll/vim-bbye" },
     config = function()
@@ -71,7 +73,7 @@ return {
         options = {
           theme = "tokyonight",
           --mode = "tabs",
-          diagnostics = "coc",
+          diagnostics = "nvim-lsp",
           offsets = {
             {
               --TODO
@@ -80,7 +82,7 @@ return {
               highlight = "Directory",
               text_align = "left"
             },
-            show_buffer_close_icons = false,
+            show_buffer_close_icons = true,
             show_close_icon = false,
             enforce_regular_tabs = true,
             tab_size = 16,

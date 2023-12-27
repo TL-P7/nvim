@@ -13,7 +13,7 @@ vim.o.autochdir = true
 vim.o.swapfile = false
 vim.o.wrap = true
 vim.o.wildmenu = true
-vim.opt.shortmess:append({c})
+vim.opt.shortmess:append({ c })
 vim.o.compatible = false
 vim.o.encoding = 'utf-8'
 
@@ -33,8 +33,8 @@ vim.o.t_ut = ''
 vim.o.smartindent = true
 vim.o.autoindent = true
 
-vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
-  callback = function ()
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+  callback = function()
     local ft = vim.bo.filetype
     if ft == 'c' or ft == 'cpp' or ft == 'h' then
       vim.o.cindent = true
@@ -55,9 +55,9 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
 
 
 vim.o.list = true
-vim.opt.listchars = {tab = '->', trail = '-'}
+vim.opt.listchars = { tab = '->', trail = '-' }
 vim.o.scrolloff = 5
-vim.opt.backspace = {"indent", "eol", "start"}
+vim.opt.backspace = { "indent", "eol", "start" }
 vim.o.foldmethod = "indent"
 vim.o.foldlevel = 99
 vim.o.laststatus = 2
@@ -69,13 +69,19 @@ vim.o.incsearch = true
 
 --settings for cursor
 vim.cmd([[
-" 进入插入模式下的光标形状
+" cursor shape when entering Insert Mode
 let &t_SI.="\e[5 q"
 
-" 进入替换模式下的光标形状
+" cursor shape when entering Replace Mode
 let &t_SR.="\e[3 q"
 
-" 从插入模式或替换模式下退出，进入普通模式后的光标形状
+" cursor shape when entering Normal Mode
 let &t_EI.="\e[1 q"
 
 ]])
+--local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
+local signs = { Error = "❌", Warn = "⚠️ ", Hint = "💡", Info = "ℹ️ " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end

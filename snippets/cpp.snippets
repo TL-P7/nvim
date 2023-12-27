@@ -1,16 +1,15 @@
 snippet tem
 	#include <bits/stdc++.h>
 	
-	using namespace std;
-	
 	typedef long long ll;
-	typedef pair<int, int> PII;
+	typedef std::pair<int, int> PII;
 	typedef long double ld;
+	typedef __int128 i8;
 	
 	#define rep_type int
-	#define rep(i, a, b) for(rep_type i = (a); i < (b); i++)
-	#define per(i, a, b) for(rep_type i = (a); i >= (b); i--)
-	#define _rep(i, a, b) for(rep_type i = (a), __ = (b); i<= __; i++)
+	#define rep(i, a, b) for (rep_type i = (a); i <= (b); i++)
+	#define per(i, a, b) for (rep_type i = (a); i >= (b); i--)
+	#define _rep(i, a, b) for (rep_type i = (a), __ = (b); i<= __; i++)
 	
 	int main() {
 	    ${0}
@@ -20,16 +19,15 @@ snippet tem
 snippet cf cf template
     #include <bits/stdc++.h>
 
-    using namespace std;
-
     typedef long long ll;
-    typedef pair<int, int> PII;
+    typedef std::pair<int, int> PII;
     typedef long double ld;
+	typedfe __int128 i8;
 
     #define rep_type int
-    #define rep(i, a, b) for(rep_type i = (a); i < (b); i++)
-    #define per(i, a, b) for(rep_type i = (a); i >= (b); i--)
-    #define _rep(i, a, b) for(rep_type i = (a), __ = (b); i<= __; i++)
+    #define rep(i, a, b) for (rep_type i = (a); i <= (b); i++)
+    #define per(i, a, b) for (rep_type i = (a); i >= (b); i--)
+    #define _rep(i, a, b) for (rep_type i = (a), __ = (b); i<= __; i++)
 
     void solve() {
         ${0}
@@ -37,7 +35,7 @@ snippet cf cf template
 
     int main() {
         int t;
-        cin >> t;
+		std::cin >> t;
         while (t--) {
             solve();
         }
