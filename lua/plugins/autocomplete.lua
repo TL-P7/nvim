@@ -4,7 +4,6 @@ local has_words_before = function()
   return col ~= 0
       and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
-
 return {
 
   {
@@ -50,7 +49,7 @@ return {
       local cmp_autopairs = require("nvim-autopairs.completion.cmp")
       local lspkind = require("lspkind")
       require("luasnip.loaders.from_snipmate").lazy_load({ { path = "~/.config/nvim/snippets" } })
-      require("luasnip.loaders.from_vscode").lazy_load()
+      --require("luasnip.loaders.from_vscode").lazy_load()
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
       cmp.setup({
         snippet = {
@@ -59,6 +58,8 @@ return {
           end,
         },
         mapping = cmp.mapping.preset.insert({
+          ["<C-n>"] = cmp.config.disable,
+          ["<C-p>"] = cmp.config.disable,
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
@@ -86,7 +87,7 @@ return {
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-j>"] = cmp.mapping.scroll_docs(4),
           ["<C-k>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-c>"] = cmp.mapping.close()
+          ["<C-q>"] = cmp.mapping.close()
         }),
 
         --mapping = {

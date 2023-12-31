@@ -3,57 +3,82 @@ local silent = { noremap = true, silent = true }
 local builtin = require("telescope.builtin")
 local dap = require("dap")
 local mappings = {
+
   --settings for copy and paste
-  { mode = "n",          from = "<C-e>",      to = "<Esc>ggVG" },
-  { mode = "v",          from = "<C-y>",      to = '"+y' },
-  { mode = "i",          from = "<C-p>",      to = '<Esc>"*pa' },
-  { mode = "v",          from = "<C-p>",      to = '<Esc>"*p' },
-  { mode = "n",          from = "<C-p>",      to = '"*p' },
+  { mode = "n", from = "<C-e>", to = "<Esc>ggVG" },
+  { mode = "v", from = "<C-y>", to = '"+y' },
+  { mode = "i", from = "<C-p>", to = '<Esc>"*pa' },
+  { mode = "v", from = "<C-p>", to = '<Esc>"*p' },
+  { mode = "n", from = "<C-p>", to = '"*p' },
+
+  --exchange two lines
+  {
+    mode = "n",
+    from = "<C-S-k>",
+    to = function()
+      if vim.fn.line('.') ~= 1 then
+        vim.cmd([[norm kddpk]])
+      end
+    end
+  },
+  {
+    mode = "n",
+    from = "<C-S-j>",
+    to = function()
+      local current_line = vim.fn.line('.')
+      if current_line == vim.fn.line('$') - 1 then
+        vim.cmd([[norm ddp]])
+      elseif current_line ~= vim.fn.line('$') then
+        vim.cmd([[norm jddkPj]])
+      end
+    end
+  },
 
   --nohl
-  { mode = "n",          from = "<Esc>u",     to = ":nohlsearch<CR>",                                          opt = silent },
+  { mode = "n",          from = "<Esc>u",     to = "<Cmd>nohlsearch<CR>",                     opt = silent },
 
   --save file
   { mode = { "n", "v" }, from = "s",          to = "<Nop>" },
-  { mode = "n",          from = "<C-s>",      to = ":w<CR>",                                                   opt = silent },
+  { mode = "n",          from = "<C-s>",      to = "<Cmd>w<CR>",                              opt = silent },
 
   --fast source
-  { mode = "n",          from = "zc",         to = ":source ~/.config/nvim/init.lua<CR>",                      opt = silent },
-  { mode = "n",          from = "zz",         to = ":e ~/.config/nvim/init.lua<CR>",                           opt = silent },
+  { mode = "n",          from = "zc",         to = "<Cmd>source ~/.config/nvim/init.lua<CR>", opt = silent },
+  { mode = "n",          from = "zz",         to = "<Cmd>e ~/.config/nvim/init.lua<CR>",      opt = silent },
 
   --settings for buliding new tabes and splits
-  { mode = "n",          from = "<C-m>",      to = ":tabe<CR>",                                                opt = silent },
-  { mode = "n",          from = "<C-h>",      to = ":BufferLineCyclePrev<CR>",                                 opt = silent },
-  { mode = "n",          from = "<C-l>",      to = ":BufferLineCycleNext<CR>",                                 opt = silent },
-  { mode = "n",          from = "<C-q>",      to = ":Bdelete<CR>",                                             opt = silent },
-  { mode = "n",          from = "<leader>q",  to = ":Bdelete<CR>:q<CR>",                                       opt = silent },
-  { mode = "n",          from = "<M-q>",      to = ":q<CR>",                                                   opt = silent },
-  { mode = "n",          from = "sr",         to = ":set splitright<CR>:vsplit<CR>",                           opt = silent },
-  { mode = "n",          from = "sl",         to = ":set nosplitright<CR>:vsplit<CR>",                         opt = silent },
-  { mode = "n",          from = "su",         to = ":set nosplitbelow<CR>:split<CR>",                          opt = silent },
-  { mode = "n",          from = "sd",         to = ":set splitbelow<CR>:split<CR>",                            opt = silent },
+  { mode = "n",          from = "<C-m>",      to = "<Cmd>tabe<CR>",                           opt = silent },
+  { mode = "n",          from = "<C-h>",      to = "<Cmd>BufferLineCyclePrev<CR>",            opt = silent },
+  { mode = "n",          from = "<C-l>",      to = "<Cmd>BufferLineCycleNext<CR>",            opt = silent },
+  { mode = "n",          from = "<C-q>",      to = "<Cmd>Bdelete<CR>",                        opt = silent },
+  { mode = "n",          from = "<leader>q",  to = "<Cmd>Bdelete<CR>:q<CR>",                  opt = silent },
+  { mode = "n",          from = "<M-q>",      to = "<Cmd>q<CR>",                              opt = silent },
+  { mode = "n",          from = "sr",         to = "<Cmd>set splitright<CR>:vsplit<CR>",      opt = silent },
+  { mode = "n",          from = "sl",         to = "<Cmd>set nosplitright<CR>:vsplit<CR>",    opt = silent },
+  { mode = "n",          from = "su",         to = "<Cmd>set nosplitbelow<CR>:split<CR>",     opt = silent },
+  { mode = "n",          from = "sd",         to = "<Cmd>set splitbelow<CR>:split<CR>",       opt = silent },
 
   --resize splits
-  { mode = "",           from = "<up>",       to = ":res +2<CR>",                                              opt = silent },
-  { mode = "",           from = "<down>",     to = ":res -2<CR>",                                              opt = silent },
-  { mode = "",           from = "<left>",     to = ":vertical resize -2<CR>",                                  opt = silent },
-  { mode = "",           from = "<right>",    to = ":vertical resize +2<CR>",                                  opt = silent },
+  { mode = "",           from = "<up>",       to = "<Cmd>res +2<CR>",                         opt = silent },
+  { mode = "",           from = "<down>",     to = "<Cmd>res -2<CR>",                         opt = silent },
+  { mode = "",           from = "<left>",     to = "<Cmd>vertical resize -2<CR>",             opt = silent },
+  { mode = "",           from = "<right>",    to = "<Cmd>vertical resize +2<CR>",             opt = silent },
 
-  --coc-explorer
-  { mode = "n",          from = "<leader>mt", to = "<Cmd>CocCommand explorer --preset simplify --width 30<CR>" },
-  { mode = "n",          from = "<leader>mf", to = "<Cmd>CocCommand explorer --preset floating <CR>" },
-  { mode = "n",          from = "<leader>mb", to = "<Cmd>CocCommand explorer --preset buffer <CR>" },
-  { mode = "n",          from = "<leader>ml", to = "<Cmd>CocList explPresets<CR>" },
+
+
+  { mode = "n",          from = "<leader>mt", to = "<Cmd>NvimTreeToggle<CR>" },
+  --{ mode = "n",          from = "<leader>mf", to = "<Cmd>CocCommand explorer --preset floating <CR>" },
+  --{ mode = "n",          from = "<leader>mb", to = "<Cmd>CocCommand explorer --preset buffer <CR>" },
+  --{ mode = "n",          from = "<leader>ml", to = "<Cmd>CocList explPresets<CR>" },
 
   --CompetiTest
-  { mode = "n",          from = "<F9>",       to = ":CompetiTest run<CR>" },
-  { mode = "n",          from = "]a",         to = ":CompetiTest add_testcase<CR>" },
-  { mode = "n",          from = "]e",         to = ":CompetiTest edit_testcase<CR>" },
-  { mode = "n",          from = "[e",         to = ":CompetiTest edit_testcase" },
-  { mode = "n",          from = "]r",         to = ":CompetiTest receive testcases<CR>" },
-  { mode = "n",          from = "]s",         to = ":CompetiTest show_ui<CR>" },
-  { mode = "n",          from = "]d",         to = ":CompetiTest delete_testcase<CR>" },
-  { mode = "n",          from = "[d",         to = ":CompetiTest delete_testcase" },
+  { mode = "n",          from = "<F9>",       to = "<Cmd>CompetiTest run<CR>" },
+  { mode = "n",          from = "]a",         to = "<Cmd>CompetiTest add_testcase<CR>" },
+  { mode = "n",          from = "]e",         to = "<Cmd>CompetiTest edit_testcase<CR>" },
+  { mode = "n",          from = "[e",         to = "<Cmd>CompetiTest edit_testcase" },
+  { mode = "n",          from = "]r",         to = "<Cmd>CompetiTest receive testcases<CR>" },
+  { mode = "n",          from = "]s",         to = "<Cmd>CompetiTest show_ui<CR>" },
+  { mode = "n",          from = "]d",         to = "<Cmd>CompetiTest delete_testcase<CR>" },
+  { mode = "n",          from = "[d",         to = "<Cmd>CompetiTest delete_testcase" },
 
   --Dashboard
   { mode = "n",          from = "<leader>b",  to = "<Cmd>Dashboard<CR>" },
@@ -61,7 +86,7 @@ local mappings = {
   --telescope
   { mode = "n",          from = "<leader>ff", to = builtin.find_files },
   { mode = "n",          from = "<leader>fc", to = builtin.current_buffer_fuzzy_find },
-  {mode = "n", from = "<leader>fg", to = builtin.live_grep},
+  { mode = "n",          from = "<leader>fg", to = builtin.live_grep },
   { mode = "n",          from = "<leader>gs", to = builtin.git_status },
   { mode = "n",          from = "<leader>fb", to = builtin.buffers },
   { mode = "n",          from = "<leader>fh", to = builtin.help_tags },
@@ -107,7 +132,6 @@ local mappings = {
     end
   },
 }
-
 
 for _, mapping in ipairs(mappings) do
   vim.keymap.set(mapping.mode or "n", mapping.from, mapping.to, mapping.opt or { noremap = true })

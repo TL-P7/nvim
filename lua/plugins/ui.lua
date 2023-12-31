@@ -73,11 +73,11 @@ return {
         options = {
           theme = "tokyonight",
           --mode = "tabs",
-          diagnostics = "nvim-lsp",
+          diagnostics = "nvim_lsp",
           offsets = {
             {
               --TODO
-              filetype = "coc-explorer",
+              filetype = "NvimTree",
               text = "File Explorer",
               highlight = "Directory",
               text_align = "left"

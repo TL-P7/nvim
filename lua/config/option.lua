@@ -13,9 +13,16 @@ vim.o.autochdir = true
 vim.o.swapfile = false
 vim.o.wrap = true
 vim.o.wildmenu = true
-vim.opt.shortmess:append({ c })
+vim.opt.shortmess:append({c})
 vim.o.compatible = false
 vim.o.encoding = 'utf-8'
+
+--help
+vim.o.helpheight = 999999999
+
+--disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 --TODO
 vim.cmd([[
